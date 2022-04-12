@@ -9,6 +9,7 @@ class TodoAppBar extends AppBar {
             actions: [
               IconButton(
                 onPressed: () => {},
+                padding: const EdgeInsets.only(right: 28),
                 icon: const Icon(Icons.add),
               )
             ]);
