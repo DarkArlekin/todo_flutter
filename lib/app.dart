@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:todo_my/todo_overview/todo.dart';
 
 class App extends MaterialApp {
-  const App({Key? key})
+  App({Key? key})
       : super(
-            key: key,
-            home: const Scaffold(
-              body: Text('x'),
-            ));
+          key: key,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const TodoOverview(),
+          },
+        );
 }
