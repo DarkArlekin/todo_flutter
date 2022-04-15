@@ -1,18 +1,18 @@
 part of 'todo_overview_bloc.dart';
 
-enum TodoStatus { initial, success, failure }
+enum TodoOverviewStatus { initial, success, failure }
 
 class TodoOverviewState extends Equatable {
   const TodoOverviewState({
-    this.status = TodoStatus.initial,
+    this.status = TodoOverviewStatus.initial,
     this.todos = const [],
   });
 
-  final TodoStatus status;
+  final TodoOverviewStatus status;
   final List<Todo> todos;
 
   TodoOverviewState copyWith({
-    TodoStatus? status,
+    TodoOverviewStatus? status,
     List<Todo>? todos,
   }) {
     return TodoOverviewState(

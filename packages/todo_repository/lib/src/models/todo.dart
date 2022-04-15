@@ -4,6 +4,22 @@ import 'constants.dart';
 
 part 'todo.g.dart';
 
+
+class TodoCheckItem extends Equatable {
+   TodoCheckItem(
+      {required this.id, required this.title, required this.isCompleted});
+
+  final String id;
+   String title;
+   bool isCompleted;
+
+  factory TodoCheckItem.fromJson(Map<String, dynamic> json) =>
+      _$TodoCheckItemFromJson(json);
+
+  @override
+  List<Object> get props => [id, title, isCompleted];
+}
+
 class Todo extends Equatable {
   const Todo({
     required this.id,
@@ -17,13 +33,13 @@ class Todo extends Equatable {
   final String title;
   final String description;
   final bool isCompleted;
-  final List checkList;
+  final List<TodoCheckItem> checkList;
 
   Todo copyWith({
     String? title,
     String? description,
     bool? isCompleted,
-    List? checkList,
+    List<TodoCheckItem>? checkList,
   }) {
     return Todo(
       title: title ?? this.title,
@@ -43,5 +59,5 @@ class Todo extends Equatable {
   }
 
   @override
-  List<Object> get props => [id, title, description, isCompleted];
+  List<Object> get props => [id, title, description, isCompleted, checkList];
 }

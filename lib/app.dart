@@ -17,12 +17,13 @@ class AppMultiBlocProvider extends MultiBlocProvider {
             child: MaterialApp(initialRoute: '/', routes: appRoutes()));
 }
 
+/// App route system
 Map<String, Widget Function(BuildContext)> appRoutes() => {
       '/': (context) => const TodoOverview(),
-      '/todo': (context) => TodoPage(
-          ModalRoute.of(context)?.settings.arguments as ScreenArguments),
+      '/todo': (context) => const TodoPage(),
     };
 
+/// App part [appProviders] implementation of [BlocProvider]
 List<BlocProvider> appProviders() => [
       BlocProvider<TodoOverviewBloc>(
         create: (BuildContext context) => TodoOverviewBloc(

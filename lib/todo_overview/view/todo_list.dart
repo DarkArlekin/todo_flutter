@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_my/app_theme.dart';
 
+import '../../todo/bloc/todo_bloc.dart';
 import '../../todo/view/todo_page.dart';
 import '../bloc/todo_overview_bloc.dart';
 
@@ -30,9 +31,14 @@ class TodoList extends StatelessWidget {
                   },
                   value: todo.isCompleted,
                 ),
-                onTap: () => {
-                  Navigator.pushNamed(context, '/todo',
-                      arguments: ScreenArguments(id: 'id', title: todo.title))
+                onTap: () {
+                  context
+                      .read<TodoBloc>()
+                      .add(TodoInitializeEvent(todo.id, todo.title));
+                  Navigator.pushNamed(
+                    context,
+                    '/todo',
+                  );
                 },
               ),
             ),

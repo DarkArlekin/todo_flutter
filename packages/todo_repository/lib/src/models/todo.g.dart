@@ -1,9 +1,39 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'todo.dart';
 
-Todo _$TodoFromJson(JsonMap json) => Todo(
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+TodoCheckItem _$TodoCheckItemFromJson(Map<String, dynamic> json) =>
+    TodoCheckItem(
+          id: json['id'] as String,
+          title: json['title'] as String,
+          isCompleted: json['isCompleted'] as bool,
+    );
+
+Map<String, dynamic> _$TodoCheckItemToJson(TodoCheckItem instance) =>
+    <String, dynamic>{
+          'id': instance.id,
+          'title': instance.title,
+          'isCompleted': instance.isCompleted,
+    };
+
+Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
       id: json['id'] as String,
       title: json['title'] as String,
+      description: json['description'] as String,
       isCompleted: json['isCompleted'] as bool,
-      description: (json['description'] ?? '') as String,
-      checkList: (json['checkList'] ?? []) as List,
-    );
+      checkList: (json['checkList'] as List<dynamic>)
+          .map((e) => TodoCheckItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+);
+
+Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'description': instance.description,
+      'isCompleted': instance.isCompleted,
+      'checkList': instance.checkList,
+};

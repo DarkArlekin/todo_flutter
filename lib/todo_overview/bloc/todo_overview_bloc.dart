@@ -22,7 +22,7 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
     final todos = await todoRepository.fetchTodos();
 
     emit(state.copyWith(
-      status: TodoStatus.success,
+      status: TodoOverviewStatus.success,
       todos: todos,
     ));
   }

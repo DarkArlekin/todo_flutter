@@ -7,25 +7,26 @@ import 'package:todo_my/todo/widgets/widgets.dart';
 import '../bloc/todo_bloc.dart';
 
 class TodoPage extends StatelessWidget {
-  const TodoPage(this.arguments, {Key? key}) : super(key: key);
-
-  final ScreenArguments arguments;
+  const TodoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    context.read<TodoBloc>().add(TodoFetchEvent(arguments.id));
-
-    return Scaffold(
-      appBar: TodoAppBar(arguments.title),
-      body: const TodoElement(),
-      backgroundColor: AppTheme.primaryWhite,
-    );
+    return BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
+      return Scaffold(
+        appBar: TodoAppBar(getTitle(state)),
+        body: const TodoElement(),
+        backgroundColor: AppTheme.primaryWhite,
+      );
+    });
   }
 }
 
-class ScreenArguments {
-  ScreenArguments({required this.id, required this.title});
-
-  final String id;
-  final String title;
+String getTitle(TodoState state) {
+  if (state.status == TodoStatus.initial) {
+    return state.title;
+  }
+  if (state.status == TodoStatus.success) {
+    return state.todo?.title ?? "";
+  }
+  return "...";
 }
