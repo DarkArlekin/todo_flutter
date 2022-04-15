@@ -1,9 +1,8 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_repository/todo_repository.dart';
+import 'package:uuid/uuid.dart';
 
 part 'todo_event.dart';
 
@@ -14,6 +13,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       : super(const TodoState(title: "...")) {
     on<TodoFetchEvent>(_onTodoFetch);
     on<TodoInitializeEvent>(_onTodoInitialize);
+    on<TodoCheckItemAddEvent>(_onTodoCheckItemAdd);
     on<TodoCheckItemCompleteEvent>(_onTodoCheckItemComplete);
   }
 
@@ -23,23 +23,33 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     emit(state.copyWith(
       title: event.title,
     ));
-    add(TodoFetchEvent(event.id));
+    if (state.todo?.id != event.id) add(TodoFetchEvent(event.id));
   }
 
   void _onTodoCheckItemComplete(
       TodoCheckItemCompleteEvent event, Emitter<TodoState> emit) {
-    print(state.todo);
     Todo editedTodo = state.todo!.copyWith(
-        checkList: state.todo!.checkList.map((todoCheckItem) {
-      if (todoCheckItem.id == event.id) {
-        todoCheckItem.isCompleted = event.isCompleted;
-      }
-      return todoCheckItem;
-    }).toList());
+        checkList: state.todo!.checkList
+            .map((todoCheckItem) => todoCheckItem.id == event.id
+                ? todoCheckItem.copyWith(
+                    isCompleted: !todoCheckItem.isCompleted)
+                : todoCheckItem)
+            .toList());
     emit(state.copyWith(
       todo: editedTodo,
     ));
-    print("x");
+  }
+
+  void _onTodoCheckItemAdd(
+      TodoCheckItemAddEvent event, Emitter<TodoState> emit) {
+    final newItem =
+        TodoCheckItem(id: const Uuid().v4(), title: "example", isCompleted: false);
+    Todo editedTodo =
+        state.todo!.copyWith(checkList: [...state.todo!.checkList, newItem]);
+
+    emit(state.copyWith(
+      todo: editedTodo,
+    ));
   }
 
   Future<void> _onTodoFetch(

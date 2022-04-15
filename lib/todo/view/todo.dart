@@ -30,7 +30,8 @@ class TodoElement extends StatelessWidget {
                     child: Text("Check list", style: TextStyle(fontSize: 12)),
                     alignment: Alignment.topLeft),
               ),
-              Expanded(child: TodoCheckList(checkList: state.todo!.checkList))
+              TodoCheckList(checkList: state.todo!.checkList),
+
             ],
           ),
         );

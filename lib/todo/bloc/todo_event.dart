@@ -10,6 +10,8 @@ class TodoInitializeEvent extends TodoEvent {
   final String title;
 }
 
+class TodoCheckItemAddEvent extends TodoEvent {}
+
 class TodoFetchEvent extends TodoEvent {
   TodoFetchEvent(this.id);
 
@@ -17,9 +19,7 @@ class TodoFetchEvent extends TodoEvent {
 }
 
 class TodoCheckItemCompleteEvent extends TodoEvent {
-  TodoCheckItemCompleteEvent({required this.id, required this.isCompleted});
+  TodoCheckItemCompleteEvent({required this.id});
 
   final String id;
-  final bool isCompleted;
-
 }

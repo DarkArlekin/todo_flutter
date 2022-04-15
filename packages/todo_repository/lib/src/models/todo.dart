@@ -4,14 +4,24 @@ import 'constants.dart';
 
 part 'todo.g.dart';
 
-
 class TodoCheckItem extends Equatable {
-   TodoCheckItem(
+  const TodoCheckItem(
       {required this.id, required this.title, required this.isCompleted});
 
   final String id;
-   String title;
-   bool isCompleted;
+  final String title;
+  final bool isCompleted;
+
+  TodoCheckItem copyWith({
+    String? id,
+    String? title,
+    bool? isCompleted,
+  }) {
+    return TodoCheckItem(
+        id: id ?? this.id,
+        title: title ?? this.title,
+        isCompleted: isCompleted ?? this.isCompleted);
+  }
 
   factory TodoCheckItem.fromJson(Map<String, dynamic> json) =>
       _$TodoCheckItemFromJson(json);
