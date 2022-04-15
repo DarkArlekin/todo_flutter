@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:todo_my/app_theme.dart';
 
 class TodoAppBar extends AppBar {
-  TodoAppBar({Key? key})
+  TodoAppBar(title, {Key? key})
       : super(
             key: key,
-            title: const Text("My Todo"),
+            title: Text(title),
             toolbarHeight: 48,
             backgroundColor: AppTheme.primaryBack,
             shadowColor: AppTheme.primaryBlue,
