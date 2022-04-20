@@ -10,3 +10,5 @@ class TodoOverviewCompleteEvent extends TodoOverviewEvent {
   final String id;
   final bool isCompleted;
 }
+
+class TodoOverviewCreateEvent extends TodoOverviewEvent {}

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_my/app_theme.dart';
 
 import '../../todo/bloc/todo_bloc.dart';
-import '../../todo/view/todo_page.dart';
 import '../bloc/todo_overview_bloc.dart';
 
 class TodoList extends StatelessWidget {
@@ -45,7 +44,7 @@ class TodoList extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               border:
-                  const Border(bottom: BorderSide(color: AppTheme.primaryBlue)),
+              const Border(bottom: BorderSide(color: AppTheme.primaryBlue)),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
@@ -61,3 +60,4 @@ class TodoList extends StatelessWidget {
     });
   }
 }
+

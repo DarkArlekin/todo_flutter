@@ -17,6 +17,7 @@ dependencies:
   equatable: ^2.0.0
   audioplayers: ^0.20.1
   uuid: ^3.0.6
+  flutter_portal: ^1.0.0
   http_client:
     path: 'packages/http_client'
   todo_repository:

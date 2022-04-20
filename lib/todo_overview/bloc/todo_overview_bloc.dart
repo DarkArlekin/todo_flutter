@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:todo_repository/todo_repository.dart';
+import 'package:uuid/uuid.dart';
 
 part 'todo_overview_event.dart';
 
@@ -13,6 +14,7 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
       : super(const TodoOverviewState()) {
     on<TodoOverviewFetchEvent>(_onTodosFetch);
     on<TodoOverviewCompleteEvent>(_onTodoCompleteEvent);
+    on<TodoOverviewCreateEvent>(_onTodoOverviewCreate);
   }
 
   final TodoRepository todoRepository;
@@ -29,13 +31,24 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
 
   void _onTodoCompleteEvent(
       TodoOverviewCompleteEvent event, Emitter<TodoOverviewState> emit) {
-      emit(state.copyWith(
-        todos: state.todos.map((todo) {
-          if (todo.id == event.id) {
-            return todo.copyWith(isCompleted: !todo.isCompleted);
-          }
-          return todo;
-        }).toList(),
-      ));
+    emit(state.copyWith(
+      todos: state.todos.map((todo) {
+        if (todo.id == event.id) {
+          return todo.copyWith(isCompleted: !todo.isCompleted);
+        }
+        return todo;
+      }).toList(),
+    ));
+  }
+
+  void _onTodoOverviewCreate(
+      TodoOverviewCreateEvent event, Emitter<TodoOverviewState> emit) {
+    final newTodo = Todo(
+        id: const Uuid().v4(),
+        title: '',
+        description: '',
+        isCompleted: false,
+        checkList: const []);
+    emit(state.copyWith(todos: [...state.todos, newTodo]));
   }
 }
