@@ -20,11 +20,12 @@ class TodoRepository extends Equatable {
         httpClient, () => TodoRepository._internal(httpClient: httpClient));
   }
 
-  const TodoRepository._internal({required this.httpClient});
+  TodoRepository._internal({required this.httpClient});
 
   static final Map<http.Client, TodoRepository> _cache = {};
 
   final http.Client httpClient;
+  String methodSaving = "";
 
   Future<List<Todo>> fetchTodos() async {
     return Future.delayed(const Duration(seconds: 1),
@@ -33,7 +34,7 @@ class TodoRepository extends Equatable {
 
   Future<Todo> fetchTodo(id) {
     return Future.delayed(
-        const Duration(seconds: 1), () => Todo.fromJson(jsonTodo));
+        const Duration(milliseconds: 400), () => Todo.fromJson(jsonTodo));
   }
 
   @override

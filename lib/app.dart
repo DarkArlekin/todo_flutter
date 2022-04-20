@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_my/settings/settings.dart';
 import 'package:todo_my/todo/bloc/todo_bloc.dart';
 import 'package:todo_my/todo/view/todo_page.dart';
 
@@ -21,6 +22,7 @@ class AppMultiBlocProvider extends MultiBlocProvider {
 Map<String, Widget Function(BuildContext)> appRoutes() => {
       '/': (context) => const TodoOverview(),
       '/todo': (context) => const TodoPage(),
+      '/settings': (context) => const SettingsPage(),
     };
 
 /// App part [appProviders] implementation of [BlocProvider]

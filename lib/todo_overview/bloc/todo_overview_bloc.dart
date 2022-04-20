@@ -45,7 +45,7 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
       TodoOverviewCreateEvent event, Emitter<TodoOverviewState> emit) {
     final newTodo = Todo(
         id: const Uuid().v4(),
-        title: '',
+        title: 'untitled',
         description: '',
         isCompleted: false,
         checkList: const []);

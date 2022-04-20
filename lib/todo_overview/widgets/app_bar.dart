@@ -27,7 +27,6 @@ PopupMenuButton _appPopupMenuButton(BuildContext context) =>
     PopupMenuButton<String>(
       padding: const EdgeInsets.only(right: 24),
       onSelected: (value) {
-        print(value);
         if (value == "todo_add") {
           context.read<TodoOverviewBloc>().add(TodoOverviewCreateEvent());
         }
