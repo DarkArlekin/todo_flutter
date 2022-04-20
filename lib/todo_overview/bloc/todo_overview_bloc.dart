@@ -50,5 +50,6 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
         isCompleted: false,
         checkList: const []);
     emit(state.copyWith(todos: [...state.todos, newTodo]));
+    todoRepository.saveTodos(state.todos);
   }
 }

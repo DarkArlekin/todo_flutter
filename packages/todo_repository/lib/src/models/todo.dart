@@ -63,6 +63,8 @@ class Todo extends Equatable {
   /// Deserializes the given [JsonMap] into a [Post].
   factory Todo.fromJson(JsonMap json) => _$TodoFromJson(json);
 
+  static Map<String, dynamic> toJson(Todo todo) => _$TodoToJson(todo);
+
   @override
   String toString() {
     return 'Todo { id: $id, title: $title, isCompleted: $isCompleted }';

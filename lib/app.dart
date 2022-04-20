@@ -36,4 +36,8 @@ List<BlocProvider> appProviders() => [
         create: (BuildContext context) =>
             TodoBloc(todoRepository: TodoRepository(httpClient: http.Client())),
       ),
+      BlocProvider<SettingsBloc>(
+        create: (BuildContext context) =>
+            SettingsBloc(),
+      ),
     ];

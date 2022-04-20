@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:http/http.dart' as http;
 import 'package:todo_repository/src/models/models.dart';
 
+import 'datalayers/todo_local_api.dart';
+
 Map<String, dynamic> jsonTodo = {
   "id": "1",
   "title": "post title",
@@ -28,6 +30,7 @@ class TodoRepository extends Equatable {
   String methodSaving = "";
 
   Future<List<Todo>> fetchTodos() async {
+    TodoLocalApi().getTodos();
     return Future.delayed(const Duration(seconds: 1),
         () => jsonString.map((json) => Todo.fromJson(json)).toList());
   }
@@ -35,6 +38,10 @@ class TodoRepository extends Equatable {
   Future<Todo> fetchTodo(id) {
     return Future.delayed(
         const Duration(milliseconds: 400), () => Todo.fromJson(jsonTodo));
+  }
+
+  void saveTodos(List<Todo> todos) {
+    TodoLocalApi().saveTodos(todos);
   }
 
   @override

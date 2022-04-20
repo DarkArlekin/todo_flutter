@@ -8,16 +8,16 @@ part of 'todo.dart';
 
 TodoCheckItem _$TodoCheckItemFromJson(Map<String, dynamic> json) =>
     TodoCheckItem(
-          id: json['id'] as String,
-          title: json['title'] as String,
-          isCompleted: json['isCompleted'] as bool,
+      id: json['id'] as String,
+      title: json['title'] as String,
+      isCompleted: json['isCompleted'] as bool,
     );
 
 Map<String, dynamic> _$TodoCheckItemToJson(TodoCheckItem instance) =>
     <String, dynamic>{
-          'id': instance.id,
-          'title': instance.title,
-          'isCompleted': instance.isCompleted,
+      'id': instance.id,
+      'title': instance.title,
+      'isCompleted': instance.isCompleted,
     };
 
 Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
@@ -28,12 +28,13 @@ Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
       checkList: (json['checkList'] as List<dynamic>)
           .map((e) => TodoCheckItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-);
+    );
 
 Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'description': instance.description,
       'isCompleted': instance.isCompleted,
-      'checkList': instance.checkList,
-};
+      'checkList': instance.checkList
+          .map((checkListItem) => _$TodoCheckItemToJson(checkListItem)).toList(),
+    };
