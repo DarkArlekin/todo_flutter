@@ -20,7 +20,7 @@ Map<String, dynamic> _$TodoCheckItemToJson(TodoCheckItem instance) =>
       'isCompleted': instance.isCompleted,
     };
 
-Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
+Todo _$TodoFromJson(json) => Todo(
       id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
@@ -36,5 +36,6 @@ Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
       'description': instance.description,
       'isCompleted': instance.isCompleted,
       'checkList': instance.checkList
-          .map((checkListItem) => _$TodoCheckItemToJson(checkListItem)).toList(),
+          .map((checkListItem) => _$TodoCheckItemToJson(checkListItem))
+          .toList(),
     };

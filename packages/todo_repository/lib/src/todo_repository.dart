@@ -14,7 +14,7 @@ Map<String, dynamic> jsonTodo = {
   ],
 };
 
-List jsonString = [jsonTodo];
+// List jsonString = [jsonTodo];
 
 class TodoRepository extends Equatable {
   factory TodoRepository({required http.Client httpClient}) {
@@ -27,12 +27,12 @@ class TodoRepository extends Equatable {
   static final Map<http.Client, TodoRepository> _cache = {};
 
   final http.Client httpClient;
+  final todoApi = TodoLocalApi();
   String methodSaving = "";
 
   Future<List<Todo>> fetchTodos() async {
-    TodoLocalApi().getTodos();
-    return Future.delayed(const Duration(seconds: 1),
-        () => jsonString.map((json) => Todo.fromJson(json)).toList());
+    final todos = await todoApi.getTodos();
+    return Future.delayed(const Duration(seconds: 1), () => todos);
   }
 
   Future<Todo> fetchTodo(id) {
@@ -41,7 +41,11 @@ class TodoRepository extends Equatable {
   }
 
   void saveTodos(List<Todo> todos) {
-    TodoLocalApi().saveTodos(todos);
+    todoApi.saveTodos(todos);
+  }
+
+  void deleteTodo(id) {
+    todoApi.removeTodo(id);
   }
 
   @override

@@ -22,7 +22,6 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
   Future<void> _onTodosFetch(
       TodoOverviewFetchEvent event, Emitter<TodoOverviewState> emit) async {
     final todos = await todoRepository.fetchTodos();
-
     emit(state.copyWith(
       status: TodoOverviewStatus.success,
       todos: todos,
