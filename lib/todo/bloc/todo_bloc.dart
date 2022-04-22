@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:todo_repository/todo_repository.dart';
@@ -42,8 +42,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
   void _onTodoCheckItemAdd(
       TodoCheckItemAddEvent event, Emitter<TodoState> emit) {
-    final newItem =
-        TodoCheckItem(id: const Uuid().v4(), title: "example", isCompleted: false);
+    final newItem = TodoCheckItem(
+        id: const Uuid().v4(), title: "example", isCompleted: false);
     Todo editedTodo =
         state.todo!.copyWith(checkList: [...state.todo!.checkList, newItem]);
 

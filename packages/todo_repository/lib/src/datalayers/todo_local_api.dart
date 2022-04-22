@@ -9,7 +9,8 @@ class TodoLocalApi {
   final storage = const FlutterSecureStorage();
 
   void saveTodos(todos) async {
-    final todosData = jsonEncode(todos.map((todo) => Todo.toJson(todo)).toList());
+    final todosData =
+        jsonEncode(todos.map((todo) => Todo.toJson(todo)).toList());
     await storage.write(key: 'todos', value: todosData);
   }
 
@@ -19,15 +20,22 @@ class TodoLocalApi {
     return todoList;
   }
 
+  Future<Todo> getTodo(id) async {
+    final todosData = await getTodos();
+    final todo = todosData.firstWhere((element) => element.id == id);
+    return todo;
+  }
+
   void removeTodo(id) async {
-    final todosData = _parseTodos(await getTodos());
+    final todosData = await getTodos();
     todosData.removeWhere((element) => element.id == id);
     saveTodos(todosData);
   }
 
   List<Todo> _parseTodos(jsonString) {
     final List<dynamic> todosListData = jsonDecode(jsonString);
-    final todoList = todosListData.map((jsonMap) => Todo.fromJson(jsonMap)).toList();
+    final todoList =
+        todosListData.map((jsonMap) => Todo.fromJson(jsonMap)).toList();
     return todoList;
   }
 }

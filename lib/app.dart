@@ -26,18 +26,21 @@ Map<String, Widget Function(BuildContext)> appRoutes() => {
     };
 
 /// App part [appProviders] implementation of [BlocProvider]
-List<BlocProvider> appProviders() => [
-      BlocProvider<TodoOverviewBloc>(
-        create: (BuildContext context) => TodoOverviewBloc(
-            todoRepository: TodoRepository(httpClient: http.Client()))
-          ..add(TodoOverviewFetchEvent()),
-      ),
-      BlocProvider<TodoBloc>(
-        create: (BuildContext context) =>
-            TodoBloc(todoRepository: TodoRepository(httpClient: http.Client())),
-      ),
-      BlocProvider<SettingsBloc>(
-        create: (BuildContext context) =>
-            SettingsBloc(),
-      ),
-    ];
+List<BlocProvider> appProviders() {
+  final todoBloc =
+      TodoBloc(todoRepository: TodoRepository(httpClient: http.Client()));
+  return [
+    BlocProvider<TodoBloc>(
+      create: (BuildContext context) => todoBloc,
+    ),
+    BlocProvider<TodoOverviewBloc>(
+      create: (BuildContext context) => TodoOverviewBloc(
+          todoRepository: TodoRepository(httpClient: http.Client()),
+          todoBloc: todoBloc)
+        ..add(TodoOverviewFetchEvent()),
+    ),
+    BlocProvider<SettingsBloc>(
+      create: (BuildContext context) => SettingsBloc(),
+    ),
+  ];
+}

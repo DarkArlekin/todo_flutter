@@ -33,7 +33,7 @@ class TodoState extends Equatable {
 
   @override
   String toString() {
-    return 'TodoOverviewState { status: $status, posts: $title }';
+    return 'TodoState { status: $status, posts: $title }';
   }
 
   @override

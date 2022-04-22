@@ -29,9 +29,8 @@ class TodoListItem extends StatelessWidget {
               title: Text(title),
               trailing: Checkbox(
                 onChanged: (bool? value) {
-                  context
-                      .read<TodoOverviewBloc>()
-                      .add(TodoOverviewCompleteEvent(id: id, isCompleted: value!));
+                  context.read<TodoOverviewBloc>().add(
+                      TodoOverviewCompleteEvent(id: id, isCompleted: value!));
                 },
                 value: isCompleted,
               ),
@@ -47,7 +46,6 @@ class TodoListItem extends StatelessWidget {
 
           /// todo: debug
           Text("id: " + id)
-
         ],
       ),
       decoration: BoxDecoration(

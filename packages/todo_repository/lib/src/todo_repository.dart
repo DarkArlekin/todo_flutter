@@ -35,9 +35,9 @@ class TodoRepository extends Equatable {
     return Future.delayed(const Duration(seconds: 1), () => todos);
   }
 
-  Future<Todo> fetchTodo(id) {
+  Future<Todo> fetchTodo(id) async {
     return Future.delayed(
-        const Duration(milliseconds: 400), () => Todo.fromJson(jsonTodo));
+        const Duration(milliseconds: 400), () async => await todoApi.getTodo(id));
   }
 
   void saveTodos(List<Todo> todos) {
