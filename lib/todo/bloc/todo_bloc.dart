@@ -22,6 +22,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
   void _onTodoInitialize(TodoInitializeEvent event, Emitter<TodoState> emit) {
     emit(state.copyWith(
       title: event.title,
+      status: TodoStatus.initial,
     ));
     if (state.todo?.id != event.id) add(TodoFetchEvent(event.id));
   }
