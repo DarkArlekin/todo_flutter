@@ -60,6 +60,7 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
         return todo;
       }).toList(),
     ));
+    _saveTodos();
   }
 
   void _onTodoOverviewCreate(
@@ -82,8 +83,6 @@ class TodoOverviewBloc extends Bloc<TodoOverviewEvent, TodoOverviewState> {
       return todo;
     }).toList()));
     _saveTodos();
-    final a = state.todos.firstWhere((element) => element.id == event.todo.id);
-    print('');
   }
 
   void _onTodoOverviewSave(
